@@ -1,14 +1,13 @@
 const router = require("express").Router();
-const { Post, User } = require("../../models");
+const { Post, User, Comment } = require("../../models");
 
 // get all posts
 router.get("/", (req, res) => {
   Post.findAll({
-    //identify the columns to retrieve in this query
     order: [["created_at", "DESC"]],
     //JOIN user table
     include: [
-      /* include the Comment model here:
+      //include the Comment model here:
       {
         model: Comment,
         attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
@@ -16,7 +15,7 @@ router.get("/", (req, res) => {
           model: User,
           attributes: ["username"],
         },
-      },*/
+      },
       {
         //define this object by referencing mode and attributes
         model: User,
@@ -32,10 +31,11 @@ router.get("/", (req, res) => {
     });
 });
 
+//get all posts from one user
 router.get("/:id", (req, res) => {
   Post.findAll({
     where: {
-      user_id: req.params.user_id,
+      user_id: req.params.id,
     },
     include: [
       // include the Comment model here:
