@@ -1,0 +1,52 @@
+<article>
+    <a href="/dashboard"> &larr; Back to dashboard</a>
+    <h2>
+        Edit Post
+    </h2>
+    <form action="/dashboard" method="post" class="edit-post-form">
+        <div>
+            <input name="post-title" type="text" value="{{post.title}}" />
+        </div>
+        <div>
+            <textarea name="post_body" id="post-body">{{post.post_body}}</textarea>
+            <!--</div>
+        <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
+        </div>-->
+            <br>
+            <button type="submit">Save post</button>
+            <button type="button" class="delete-post-btn">Delete post</button>
+    </form>
+    <h3>
+        Comments
+    </h3>
+    <form action="/api/comments" method="post" class="comment-form">
+        <div>
+            <input type="hidden" name="post_id" value="{{post.id}}" />
+            <textarea name="comment_text"></textarea>
+        </div>
+
+        <div>
+            <button type="submit">Add comment</button>
+        </div>
+    </form>
+</article>
+{{!-- <form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
+    </div>
+    <div>
+        <button type="submit">add comment</button>
+    </div>
+</form> --}}
+<div class="comments">
+    {{#each post.comments}}
+    <section class="comment">
+        <div class="meta">
+            {{user.username}} on {{format_date created_at}}
+        </div>
+        <div class="text">
+            {{comment_text}}
+        </div>
+    </section>
+    {{/each}}
+</div>

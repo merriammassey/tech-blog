@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Post, User, Comment } = require("../models");
+const withAuth = require("../utils/auth.js");
 
 router.get("/", (req, res) => {
   Post.findAll({
@@ -34,6 +35,44 @@ router.get("/", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+//route to edit one post
+router.get("/edit/:id", (req, res) => {
+  Post.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: ["id", "title", "post_body", "created_at"],
+    include: [
+      {
+        model: Comment,
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        include: {
+          model: User,
+          attributes: ["username"],
+        },
+      },
+      {
+        model: User,
+        attributes: ["username"],
+      },
+    ],
+  }).then((dbPostData) => {
+    // serialize data before passing to template
+    const post = dbPostData.get({ plain: true });
+
+    res
+      .render("edit-post", {
+        post,
+        loggedIn: true,
+      })
+
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
 });
 
 module.exports = router;
