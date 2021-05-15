@@ -1,0 +1,36 @@
+<section>
+    <h2>Create New Post</h2>
+
+    <form action="/api/posts" method="post" class="new-post-form">
+        <div>
+            <label for="post-title">Title</label>
+            <input type="text" id="post-title" name="title" />
+        </div>
+        <div>
+            <textarea name="post_body" id="post-body"></textarea>
+        </div>
+        <button type="submit" class="btn">Create</button>
+    </form>
+</section>
+{{#if posts.length}}
+<section>
+    <h2>Your Posts</h2>
+    <ol>
+        {{#each posts as |post|}}
+        <li>
+            <article class="post">
+                <div class="title">
+                    <a href="/post/{{post.id}}">{{title}}</a>
+                </div>
+                <div class="meta">
+                    by {{post.user.username}} on {{post.created_at}}
+                    <br>
+                    {{post.comments.length}} {{format_plural "comment" comments.length}}
+                    <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
+                </div>
+            </article>
+        </li>
+        {{/each}}
+    </ol>
+</section>
+{{/if}}

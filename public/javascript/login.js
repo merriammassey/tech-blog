@@ -47,7 +47,8 @@ async function loginFormHandler(event) {
     });
 
     if (response.ok) {
-      document.location.replace("/");
+      //if login is succesful, redirect to dashboard
+      document.location.replace("/dashboard");
     } else {
       alert(response.statusText);
     }

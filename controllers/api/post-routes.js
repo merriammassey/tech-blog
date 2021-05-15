@@ -72,13 +72,15 @@ router.post("/", (req, res) => {
   Post.create({
     title: req.body.title,
     post_body: req.body.post_body,
-    user_id: req.body.user_id,
+    //use id of user that is logged in
+    user_id: req.session.user_id,
   })
     .then((dbPostData) => res.json(dbPostData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
+  res.redirect("/dashboard");
 });
 
 //replace the title or body of the post

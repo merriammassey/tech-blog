@@ -16,6 +16,7 @@
             </h1>
             <nav>
                 {{#if loggedIn}}
+                <a href="/dashboard">dashboard</a>
                 <button id="logout" class="btn-no-style">logout</button>
                 {{else}}
                 <a href="/login">login</a>
@@ -32,6 +33,7 @@
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
     {{/if}}
+    <script src="luxon.js"></script>
 </body>
 
 </html>
