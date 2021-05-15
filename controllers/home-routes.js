@@ -4,6 +4,8 @@ const { Post, User, Comment } = require("../models");
 
 //get all posts and render them to homepage
 router.get("/", (req, res) => {
+  //look at session number and compare to application>cookies>sessionID
+  console.log(req.session);
   Post.findAll({
     attributes: ["id", "title", "post_body", "created_at"],
     include: [
@@ -34,6 +36,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
+  //if session exists, redirect to homepage
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
   res.render("login");
 });
 
