@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
       //serialize the array
       const posts = dbPostData.map((post) => post.get({ plain: true }));
       // serialize object to specific properties
-      res.render("homepage", { posts });
+      res.render("homepage", { posts, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);
@@ -76,9 +76,11 @@ router.get("/post/:id", (req, res) => {
       // serialize the data
       const post = dbPostData.get({ plain: true });
 
-      // pass data to template
-      res.render("single-post", { post });
-    })
+      // pass data and session (to conditinally render comment form) to template 
+      res.render('single-post', {
+        post,
+        loggedIn: req.session.loggedIn
+      })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
