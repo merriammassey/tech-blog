@@ -3,7 +3,7 @@
     <h2>
         Edit Post
     </h2>
-    <form action="/dashboard" method="post" class="edit-post-form">
+    <form class="edit-post-form">
         <div>
             <input name="post-title" type="text" value="{{post.title}}" />
         </div>
@@ -50,3 +50,6 @@
     </section>
     {{/each}}
 </div>
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>

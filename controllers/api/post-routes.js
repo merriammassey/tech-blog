@@ -109,6 +109,7 @@ router.put("/:id", withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+  res.redirect("/dashboard");
 });
 
 router.delete("/:id", withAuth, (req, res) => {
@@ -128,6 +129,7 @@ router.delete("/:id", withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+  res.redirect("/dashboard");
 });
 
 module.exports = router;

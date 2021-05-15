@@ -2,8 +2,15 @@ const router = require("express").Router();
 const sequelize = require("../config/connection");
 const { Post, User, Comment } = require("../models");
 const withAuth = require("../utils/auth.js");
+const authChecker = (req, res, next) => {
+  if (req.session.user_id) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+};
 
-router.get("/", (req, res) => {
+router.get("/", authChecker, (req, res) => {
   Post.findAll({
     where: {
       // use the ID from the session
