@@ -15,7 +15,16 @@ router.post("/", withAuth, (req, res) => {
       res.status(400).json(err);
     });
   }
+
+  /* console.log(window.location.href);
+  if (
+    window.location.href ===
+    "https://serene-peak-86703.herokuapp.com/dashboard/edit/" + req.body.post_id
+  ) {
+    res.redirect("/dashboard/edit/" + req.body.post_id);
+  } else { */
   res.redirect("/post/" + req.body.post_id);
+  //}
 });
 
 router.get("/", (req, res) => {
