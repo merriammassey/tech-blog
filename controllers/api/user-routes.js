@@ -3,7 +3,7 @@ const { User, Post, Comment } = require("../../models");
 const withAuth = require("../../utils/auth.js");
 
 // POST /api/users
-router.post("/", withAuth, (req, res) => {
+router.post("/", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
