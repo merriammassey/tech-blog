@@ -2,7 +2,9 @@
 
 ## Purpose
 
-This blog was designed to provide tech writers an outlet to post their articles and ideas.
+This CMS-style blog follows the Model View Controller paradigm, leveraging Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication. 
+
+The blog allows developers to publish posts and comment on other developers’ posts as well. 
 
 ## Built With
 
